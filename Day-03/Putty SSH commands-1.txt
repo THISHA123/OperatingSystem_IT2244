@@ -1,0 +1,28 @@
+# Putty SSH commands
+
+
+# File operations
+touch ABC.txt         # Create an empty file ABC.txt or update its timestamp
+ls -ltr              # List files in long format, sorted by modification time (reverse order)
+
+# Editing and viewing files
+vi ABC.txt           # Open ABC.txt in the vi editor for editing
+more ABC.txt         # Display the contents of ABC.txt one screen at a time
+ls -ltr              # List files again to check changes
+more                 # Display contents page by page (if a file is piped)
+less ABC.txt         # View ABC.txt with both forward and backward scrolling
+
+# Changing file permissions
+chmod 777 ABC.txt    # Grant full permissions (read, write, execute) to everyone
+chmod 757 ABC.txt    # Set permissions: owner (rwx), group (r-x), others (rwx)
+
+# Counting lines in a CSV file
+wc -l wyz.csv        # Count the number of lines in wyz.csv
+
+
+Vi/Vim Commands:
+:wq → Saves the file and exits.
+
+:wq! → Saves the file and exits forcefully (ignoring warnings).
+
+:q! → Exits without saving changes.
