@@ -1,0 +1,37 @@
+# Command
+
+head -8 abc.tsv | tail -n1
+
+What It Does:
+1. head -8 abc.tsv → Extracts the first 8 lines of abc.tsv.
+
+2. | (Pipe) → Passes the output of head as input to tail.
+
+3. tail -n1 → Extracts only the last (8th) line from the previous output.
+
+This command displays only the 8th line of abc.tsv
+
+
+#Command 
+
+awk -F'\t' '{print NF; exit}' abc.tsv
+
+1. -F'\t' → Sets the field separator as a tab (\t) because abc.tsv is a TSV (Tab-Separated Values) file.
+
+2. NF → Prints the number of fields (columns) in the first row.
+
+3. exit → Ensures that awk only processes the first line, making it efficient.
+
+Displays the number of columns in abc.tsv
+
+#Command
+
+head -n10 abc.tsv | grep 'bb'
+
+1. head -n10 abc.tsv → Extracts the first 10 lines of abc.tsv.
+
+2. | (Pipe) → Passes the output of head as input to grep.
+
+3. grep 'bb' → Searches for lines containing the string "bb" within those first 10 lines.
+
+Displays all lines from the first 10 of abc.tsv that contain "bb".
