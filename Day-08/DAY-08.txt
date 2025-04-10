@@ -1,0 +1,212 @@
+Q1)write a code for small astrology based on your life path number for that get date of birth 
+from user than calculsate life path number(use switch case)
+Example:
+
+date 23
+	calculate for life path number:
+		a=date%10  #3
+		b=date/10	#2
+		c=a+b	#5
+		
+	if life path number:
+		1:Lucky
+		2.Carefuly do your work
+		3:Storger
+		4:Happy
+		5:Can get help
+		6:Doubt
+		7:Sad
+		8:Like
+		9:Courage
+		
+		
+Q2) give list of numbers then calculate the summation and multiplication using for loop
+Example:
+	1 2 3 4 5
+		summation = 15
+		multiplication= 120
+
+Syntax for FOR Loop
+			###########
+			for variable in list
+			do
+				commands
+			done
+			
+##########
+syntax for while loop
+			
+			While [condition]
+			### while[$variable_name -le 10]
+				do
+					commands
+				done
+				
+				
+Q3)print the integers from 1 to 10 using while loop
+
+4)Print below pattern using nested loop
+colums = 7
+rows = 7
+
+1).
+*
+* *
+* * *
+* * * *
+* * * * *
+* * * * * *
+* * * * * * *
+
+2).
+* * * * * * *
+* * * * * * 
+* * * * * 
+* * * *
+* * * 
+* * 
+* *
+*
+
+3).
+1
+2 2
+3 3 3
+4 4 4 4
+5 5 5 5 5
+6 6 6 6 6 6 
+7 7 7 7 7 7 7
+
+4).
+1
+1 2
+1 2 3
+1 2 3 4
+1 2 3 4 5
+1 2 3 4 5 6 
+1 2 3 4 5 6 7
+
+5).
+      *
+     * *
+    * * *
+   * * * *
+  * * * * *
+ * * * * * *
+* * * * * * *
+..................................
+
+A1).
+
+
+read -p "Enter your Date of Birth (DDMMYYYY): " dob
+
+
+sum=0
+while [ $dob -gt 0 ]; do
+    sum=$((sum + dob % 10))
+    dob=$((dob / 10))
+done
+
+
+while [ $sum -gt 9 ]; do
+    temp=$sum
+    sum=0
+    while [ $temp -gt 0 ]; do
+        sum=$((sum + temp % 10))
+        temp=$((temp / 10))
+    done
+done
+
+
+case $sum in
+    1) echo "Lucky" ;;
+    2) echo "Carefully do your work" ;;
+    3) echo "Stronger" ;;
+    4) echo "Happy" ;;
+    5) echo "Can get help" ;;
+    6) echo "Doubt" ;;
+    7) echo "Sad" ;;
+    8) echo "Like" ;;
+    9) echo "Courage" ;;
+    *) echo "Invalid life path number" ;;
+esac
+
+A2).
+
+
+read -p "Enter numbers separated by space: " -a numbers
+
+sum=0
+mul=1
+
+for num in "${numbers[@]}"; do
+    sum=$((sum + num))
+    mul=$((mul * num))
+done
+
+echo "Summation = $sum"
+echo "Multiplication = $mul"
+
+A3).
+
+
+i=1
+while [ $i -le 10 ]; do
+    echo $i
+    i=$((i + 1))
+done
+
+A4).
+
+
+rows=7
+
+# 1. Left-aligned increasing triangle
+echo "Pattern 1:"
+for ((i=1; i<=rows; i++)); do
+    for ((j=1; j<=i; j++)); do
+        echo -n "* "
+    done
+    echo
+done
+
+# 2. Left-aligned decreasing triangle
+echo -e "\nPattern 2:"
+for ((i=rows; i>=1; i--)); do
+    for ((j=1; j<=i; j++)); do
+        echo -n "* "
+    done
+    echo
+done
+
+# 3. Repeating numbers (row number)
+echo -e "\nPattern 3:"
+for ((i=1; i<=rows; i++)); do
+    for ((j=1; j<=i; j++)); do
+        echo -n "$i "
+    done
+    echo
+done
+
+# 4. Incremental numbers in row
+echo -e "\nPattern 4:"
+for ((i=1; i<=rows; i++)); do
+    for ((j=1; j<=i; j++)); do
+        echo -n "$j "
+    done
+    echo
+done
+
+# 5. Centered Pyramid
+echo -e "\nPattern 5:"
+for ((i=1; i<=rows; i++)); do
+    for ((j=i; j<rows; j++)); do
+        echo -n " "
+    done
+    for ((k=1; k<=i; k++)); do
+        echo -n "* "
+    done
+    echo
+done
+
