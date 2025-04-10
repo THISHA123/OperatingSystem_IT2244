@@ -1,0 +1,110 @@
+1. Get the Calendar and Date
+
+cal    # Displays the current month's calendar
+date   # Displays the current date and time
+
+2. Get Student Name and Marks for 3 Subjects
+
+
+read -p "Enter student name: " name
+
+
+read -p "Enter marks for 1st subject: " sub1
+read -p "Enter marks for 2nd subject: " sub2
+read -p "Enter marks for 3rd subject: " sub3
+
+
+total=$((sub1 + sub2 + sub3))
+
+# Display results
+echo "Name: $name"
+echo "1st Subject: $sub1"
+echo "2nd Subject: $sub2"
+echo "3rd Subject: $sub3"
+echo "Total: $total"
+
+3. Create a Calculator with Arithmetic Operators
+
+
+read -p "Enter the first number: " num1
+read -p "Enter the second number: " num2
+
+
+summation=$((num1 + num2))
+subtraction=$((num1 - num2))
+division=$((num1 / num2))
+multiplication=$((num1 * num2))
+
+# Display results
+echo "Summation: $summation"
+echo "Subtraction: $subtraction"
+echo "Division: $division"
+echo "Multiplication: $multiplication"
+
+4. Get Day Based on User Input Number
+
+echo "Enter the number (1-7):"
+read number
+
+case $number in
+    1) echo "Monday" ;;
+    2) echo "Tuesday" ;;
+    3) echo "Wednesday" ;;
+    4) echo "Thursday" ;;
+    5) echo "Friday" ;;
+    6) echo "Saturday" ;;
+    7) echo "Sunday" ;;
+    *) echo "Unrecognized number" ;;
+esac
+
+5. Verify User Name
+
+#my user id
+whoami
+
+valid_user="2021ict113"
+
+read -p "Enter user name: " enter_user
+
+if [ "$enter_user" == "$valid_user" ]; then
+    echo "User name is correct"
+else
+    echo "User name is incorrect"
+fi
+
+6. Compare Two Numbers
+
+echo "Enter two numbers:"
+read num1 num2
+
+if [ "$num1" -gt "$num2" ]; then
+    echo "$num1 is greater than $num2"
+elif [ "$num1" -lt "$num2" ]; then
+    echo "$num1 is less than $num2"
+else
+    echo "$num1 is equal to $num2"
+fi
+
+7. Create Simple Calculator Using expr
+
+
+
+read -p "Enter the first number: " num1
+read -p "Enter the second number: " num2
+
+# using expr
+summation=$(expr $num1 + $num2)
+subtraction=$(expr $num1 - $num2)
+division=$(expr $num1 / $num2)
+multiplication=$(expr $num1 \* $num2)
+
+
+echo "Summation: $summation"
+echo "Subtraction: $subtraction"
+echo "Division: $division"
+echo "Multiplication: $multiplication"
+
+chmod 777 filename.sh
+
+
+./exX.sh  
