@@ -1,0 +1,86 @@
+# Creating and Editing the CSV
+touch infor.csv
+vi infor.csv
+
+# Filtering and Viewing Data
+grep 'Engineering' infor.csv
+tail -3 infor.csv
+head -3 infor.csv
+awk -F, '{print NF;exit}' infor.csv
+awk -F, '{print $3}' infor.csv
+cut -d',' -f3 infor.csv
+awk -F, '{print $3,$5}' infor.csv
+
+# Sorting
+sort -t',' -k3,3n infor.csv
+sort -t',' -k4,4n infor.csv
+sort -t',' -k4,4nr infor.csv
+
+# Working with Output
+head -3 infor.csv >> rows_infor.csv
+awk -F, '{print $3,$4}' infor.csv >> xyz.csv
+awk -F, '{print $4}' infor.csv | sort
+awk -F, '{print $4}' infor.csv | sort -n
+
+# Selecting Specific Line
+sed -n '7p' infor.csv
+
+#Salary Descending Sort with Header
+(head -n 1 infor.csv && tail -n +2 infor.csv | sort -t',' -k4,4nr -n) > sorted_infor.csv
+
+........................................................................................
+
+# Filtering and Viewing Data
+grep 'Engineering' infor.csv
+# Searches for lines containing the string 'Engineering' in 'infor.csv' and displays them.
+
+tail -3 infor.csv
+# Displays the last 3 lines of the file 'infor.csv'.
+
+head -3 infor.csv
+# Displays the first 3 lines of the file 'infor.csv'.
+
+awk -F, '{print NF;exit}' infor.csv
+# Uses awk to count the number of fields (columns) in the CSV file, separating fields by commas.
+
+awk -F, '{print $3}' infor.csv
+# Prints the 3rd column (Age) from 'infor.csv'.
+
+cut -d',' -f3 infor.csv
+# Cuts and displays the 3rd field (Age) using a comma as the delimiter.
+
+awk -F, '{print $3,$5}' infor.csv
+# Prints the 3rd column (Age) and the 5th column (Department) from 'infor.csv'.
+
+# Sorting
+sort -t',' -k3,3n infor.csv
+# Sorts the data in 'infor.csv' based on the 3rd column (Age) in ascending numerical order.
+
+sort -t',' -k4,4n infor.csv
+# Sorts the data in 'infor.csv' based on the 4th column (Salary) in ascending numerical order.
+
+sort -t',' -k4,4nr infor.csv
+# Sorts the data in 'infor.csv' based on the 4th column (Salary) in descending order.
+
+# Working with Output
+head -3 infor.csv >> rows_infor.csv
+# Appends the first 3 lines of 'infor.csv' to a new file called 'rows_infor.csv'.
+
+awk -F, '{print $3,$4}' infor.csv >> xyz.csv
+# Extracts the 3rd (Age) and 4th (Salary) columns from 'infor.csv' and appends them to 'xyz.csv'.
+
+awk -F, '{print $4}' infor.csv | sort
+# Extracts the 4th column (Salary) and sorts the salaries in ascending order.
+
+awk -F, '{print $4}' infor.csv | sort -n
+# Extracts the 4th column (Salary) and sorts the salaries in ascending numerical order.
+
+# Selecting Specific Line
+sed -n '7p' infor.csv
+# Displays only the 7th line of 'infor.csv'.
+
+# Correct Final Command (Salary Descending Sort with Header)
+(head -n 1 infor.csv && tail -n +2 infor.csv | sort -t',' -k4,4nr -n) > sorted_infor.csv
+# Combines the header line (1st line) with the sorted remaining lines based on the 4th column (Salary) in descending order.
+# The output is saved in a new file called 'sorted_infor.csv'.
+
