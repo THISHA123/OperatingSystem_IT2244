@@ -1,0 +1,64 @@
+# Shell Script Operations
+
+## 1. Create and Edit the Script
+
+vi prgrml.sh  # Open a new shell script file for editing
+ls  # List files in the current directory
+chmod 777 prgrml.sh  # Give all permissions to the script
+./prgrml.sh  # Run the shell script
+
+#Script Content
+echo "Who are you?"  # Ask for the user's name
+read name  # Read the user's input
+echo "Enter Number 1"  
+read x  
+echo "Enter Number 2"  
+read y  
+echo "Enter Number 3"  
+read z  
+sum=$(($x+$y+$z))  # Calculate the sum
+avg=$(($sum/3))  # Calculate the average
+echo "Hi" $name  # Greet the user
+echo "Summation" $sum  # Display the summation
+echo "Average" $avg  # Display the average
+
+#Output
+Who are you?
+Thisha
+Enter Number 1
+2
+Enter Number 2
+3
+Enter Number 3
+5
+Hi Thisha
+Summation 10
+Average 3
+
+
+#Exercise: Read Two Numbers and Perform Operations
+
+echo "Enter num 1"  
+read a  
+echo "Enter num 2"  
+read b 
+sum=$(($a+$b))  # Calculate the sum
+sub=$(($a-$b))  # Calculate the difference
+mul=$(($a*$b))  # Calculate the product
+div=$(($a/$b))  # Calculate the division
+echo "Sum: $sum"  # Display the sum
+echo "Subtraction: $sub"  # Display the difference
+echo "Multiplication: $mul"  # Display the product
+echo "Division: $div"  # Display the division result
+
+#Output
+Enter num 1
+10
+Enter num 2
+5
+Sum: 15
+Subtraction: 5
+Multiplication: 50
+Division: 2
+
+

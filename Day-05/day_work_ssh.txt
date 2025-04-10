@@ -1,0 +1,78 @@
+#Verify Files and Directories
+
+pwd  # Check the current directory
+ls -ltr  # List files with details in reverse order
+ls -a  # List all files, including hidden ones
+
+#Check System Date and Calendar
+
+cal  # Display the calendar
+
+date +%d  # Get current day
+date +%y  # Get current year (last two digits)
+date +%A  # Get full weekday name
+date +%a  # Get short weekday name
+date +%B  # Get full month name
+date +%b  # Get short month name
+date +%m  # Get month number
+date +%H  # Get current hour
+date +%T  # Get full timestamp
+
+.....................................................
+
+login as: 2021ict113
+2021ict113@172.16.140.150's password:
+Last login: Fri Mar 21 15:21:36 2025 from 172.16.140.37
+[2021ict113@fedora ~]$ vi mno.tsv
+[2021ict113@fedora ~]$ head -n10 mno.tsv | grep 'bb'
+bb      66      33      78
+[2021ict113@fedora ~]$ cal
+     March 2025
+Su Mo Tu We Th Fr Sa
+                   1
+ 2  3  4  5  6  7  8
+ 9 10 11 12 13 14 15
+16 17 18 19 20 21 22
+23 24 25 26 27 28 29
+30 31
+[2021ict113@fedora ~]$ pwd
+/home/2021ict113
+[2021ict113@fedora ~]$ ls
+' '   abc.txt   mno.csv   mno.tsv   mon.csv   rows_mno.tsv   wyz.csv
+[2021ict113@fedora ~]$ ls -a
+' '   abc.txt         .bash_logout    .lesshsQ   mon.csv        wyz.csv
+ .    .abc.txt.swp    .bash_profile   mno.csv    .mozilla       .wyz.csv.swp
+ ..   .bash_history   .bashrc         mno.tsv    rows_mno.tsv
+[2021ict113@fedora ~]$ ls -ltr
+total 16
+-rw-r--r--. 1 2021ict113 2021ict113   0 Mar 17 11:41  abc.txt
+-r-xr--rwx. 1 2021ict113 2021ict113   0 Mar 17 12:01  wyz.csv
+-rw-r--r--. 1 2021ict113 2021ict113   0 Mar 21 14:58  mon.csv
+-rw-r--r--. 1 2021ict113 2021ict113  77 Mar 21 15:09  mno.csv
+-rw-r--r--. 1 2021ict113 2021ict113  36 Mar 21 15:28  rows_mno.tsv
+-rw-r--r--. 1 2021ict113 2021ict113 431 Mar 21 15:36 ' '
+-rw-r--r--. 1 2021ict113 2021ict113 865 Mar 24 11:10  mno.tsv
+[2021ict113@fedora ~]$ date +%d
+24
+[2021ict113@fedora ~]$ date +%y
+25
+[2021ict113@fedora ~]$ date +%A
+Monday
+[2021ict113@fedora ~]$ date +%a
+Mon
+[2021ict113@fedora ~]$ date +%B
+March
+[2021ict113@fedora ~]$ date +%b
+Mar
+[2021ict113@fedora ~]$ date +%m
+03
+[2021ict113@fedora ~]$ date +%H
+11
+[2021ict113@fedora ~]$ date +%h
+Mar
+[2021ict113@fedora ~]$ date +%t
+
+[2021ict113@fedora ~]$ date +%T
+11:50:19
+[2021ict113@fedora ~]$ date +%M
+51
