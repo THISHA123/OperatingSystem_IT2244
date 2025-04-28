@@ -1,4 +1,3 @@
-📋 
 No.	Topic	Technique
 1	Astrology based on Life Path Number	Switch-case
 2	Summation and Multiplication of numbers	For Loop
