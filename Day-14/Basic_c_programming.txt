@@ -1,0 +1,211 @@
+
+-------------------------------
+Basic C Program
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    printf("Hello World!\n");
+    return 0;
+}
+
+-------------------------------
+Variables and Errors
+-------------------------------
+// Correct declaration and assignment
+int age;
+age = 25;
+
+// Incorrect syntax (fixed below)
+// intt age=25; --> Error: 'intt' is not a valid type
+
+// Corrected:
+int age = 25;
+
+#include <stdio.h>
+
+int main() {
+    int age = 25;
+    printf("%d", age);  // Fixed: used printf instead of print
+    return 0;
+}
+
+-------------------------------
+C Format Specifiers
+-------------------------------
+%d / %i → Integer (whole numbers)
+%f / %F → Floating-point numbers (decimal values)
+%lf → Double (higher precision floating-point)
+%e / %E → Scientific notation for floating-point numbers
+%c → Single character
+%s → String (sequence of characters)
+
+-------------------------------
+Working with Variables
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    int age = 25;
+    printf("%d", age);
+    printf("c programming");
+
+    age = 31;
+    printf("\nNew age: %d", age);
+    return 0;
+}
+
+-------------------------------
+Variable Assignment
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    int firstNumber = 25;
+    printf("first number: %d\n", firstNumber);
+
+    int secondNumber = firstNumber;
+    printf("second number: %d\n", secondNumber);
+    return 0;
+}
+
+-------------------------------
+Uninitialized Variable
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    int firstNumber, secondNumber = 25;
+    printf("first number: %d\n", firstNumber);  // May print a garbage value
+    printf("second number: %d\n", secondNumber);
+    return 0;
+}
+
+Note: `firstNumber` is uninitialized, will contain garbage.
+
+-------------------------------
+Variable Naming Rules
+-------------------------------
+- Cannot use space in variable names
+- Cannot start with a number
+- Can use letters, numbers, and underscores
+
+-------------------------------
+Sizeof Operator
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    int age = 10;
+    printf("Age: %d\n", age);
+    printf("Size of age: %zu bytes\n", sizeof(age));
+    return 0;
+}
+
+-------------------------------
+Working with double
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    double number = 12.45;
+    printf("%lf", number);
+    return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+    double number = 12.45;
+    printf("%.2lf", number);
+    return 0;
+}
+
+-------------------------------
+Working with float
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    float number = 10.9f;
+    printf("%f\n", number);      // Full format
+    printf("%.1f\n", number);    // One decimal
+    return 0;
+}
+
+-------------------------------
+Character and ASCII
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    char character = 'z';
+    printf("Character: %c\n", character);
+    printf("ASCII Value: %d\n", character);
+    return 0;
+}
+
+-------------------------------
+Taking Input from Users
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    int age;
+    printf("Enter your age: ");
+    scanf("%d", &age);
+    printf("Age = %d\n", age);
+    return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+    double number;
+    char alpha;
+    printf("Enter double input: ");
+    scanf("%lf", &number);
+    printf("\nYour double input is: %.1f\n", number);
+
+    printf("Enter char input: ");
+    scanf(" %c", &alpha);
+    printf("Your char input is: %c\n", alpha);
+    return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+    double number;
+    char alpha;
+    printf("Enter double and char inputs: ");
+    scanf("%lf %c", &number, &alpha);
+    printf("\nYour double input is: %.2lf", number);
+    printf("\nYour char input is: %c\n", alpha);
+    return 0;
+}
+
+-------------------------------
+Comments in C
+-------------------------------
+// Single-line comment
+
+/* 
+Multi-line
+comment 
+*/
+
+-------------------------------
+Arithmetic Operations
+-------------------------------
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 3;
+    printf("Addition: %d\n", a + b);
+    printf("Subtraction: %d\n", a - b);
+    printf("Multiplication: %d\n", a * b);
+    printf("Division: %d\n", a / b);
+    printf("Modulus: %d\n", a % b);
+    return 0;
+}
