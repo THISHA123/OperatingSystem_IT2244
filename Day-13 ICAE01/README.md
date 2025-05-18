@@ -8,6 +8,19 @@
 |Step 3 ->practical|![practical](https://github.com/user-attachments/assets/a0444dcb-2496-4673-b6af-fd6768a2f661)|
 |Step 4|![4](https://github.com/user-attachments/assets/0b5e1e2e-3c1a-493a-aa60-afe54abd124b)|
 
+Question 02
+|Dis|Output|
+|------------|---------------|
+|data.csv|![data  csv](https://github.com/user-attachments/assets/10a09ff0-b13b-4a2f-8caf-b83bd52e159c)|
+| GPA greater than 3.5|![gpa](https://github.com/user-attachments/assets/e02e4f1d-bf89-45e0-8f70-89c53a01c286)|
+|average GPA|![avg gpa](https://github.com/user-attachments/assets/f4eedf21-a920-4034-ab1c-8cb263c5ebb5)|
+
+Question 03
+![answer 3](https://github.com/user-attachments/assets/af5cdd12-cfd5-4193-a41d-6ba832a381e3)
+
+
+
+
 
 
 
