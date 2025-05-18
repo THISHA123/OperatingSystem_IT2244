@@ -1,0 +1,86 @@
+answer1.bat
+
+
+@echo off
+
+:: Step 1: Create directories on Desktop
+cd %USERPROFILE%\Desktop
+mkdir CSC2244 Marks Exam
+
+:: Step 2: Create subdirectories under CSC2244
+cd CSC2244
+mkdir practical theory "exam papers"
+
+:: Step 3: Create text, Word, and PowerPoint files inside each subdirectory
+cd practical
+echo Practical Notes > practical.txt
+echo > practical.docx
+echo > practical.pptx
+cd ..
+
+cd theory
+echo Theory Notes > theory.txt
+echo > theory.docx
+echo > theory.pptx
+cd ..
+
+cd "exam papers"
+echo Exam Paper > exam.txt
+echo > exam.docx
+echo > exam.pptx
+cd ..
+
+:: Step 4: Create two Excel files on Desktop
+cd %USERPROFILE%\Desktop
+echo > Icae.xlsx
+echo > "Final Exam Marks.xlsx"
+
+:: Step 5: Move Excel files to Marks directory
+move Icae.xlsx Marks\
+move "Final Exam Marks.xlsx" Marks\
+
+:: Step 6: Copy Marks directory to Exam directory
+xcopy /E /I Marks Exam\Marks
+
+:: Step 7: Hide the Exam directory
+attrib +h Exam
+```
+
+---
+
+
+# Question 02 
+
+# 1. Filter rows where GPA > 3.5
+echo "Students with GPA > 3.5:"
+awk -F',' 'NR==1 || $4 > 3.5' data.csv
+
+# 2. Calculate average GPA
+average=$(awk -F',' 'NR>1 {sum+=$4; count++} END {if (count > 0) print sum/count}' data.csv)
+echo "Average GPA of all students: $average"
+
+
+---
+
+
+
+# Question 03
+
+read -p "Enter String_1: " str1
+read -p "Enter String_2: " str2
+
+len1=${#str1}
+len2=${#str2}
+
+if [ $len1 -gt $len2 ]; then
+    echo "$str1 is larger than $str2"
+elif [ $len2 -gt $len1 ]; then
+    echo "$str2 is larger than $str1"
+else
+    echo "$str1 and $str2 are equal in length"
+fi
+
+
+---
+
+
