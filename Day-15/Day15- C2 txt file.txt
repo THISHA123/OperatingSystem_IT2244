@@ -517,3 +517,102 @@ int main() {
 [2021ict113@fedora ~]$ ./binary_decimal
 Enter a binary number: 1101
 Decimal equivalent: 13
+
+Example 11:
+Write a C program that:
+Accepts an array of integers from the user.
+Finds any displays the maximum and minimum values in the array. 
+
+
+#include <stdio.h>
+
+int main() {
+    int n, i, max, min;
+
+    
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    // Get array elements from the user
+    printf("Enter %d integers: ", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Initialize max and min with the first element
+    max = arr[0];
+    min = arr[0];
+
+    // Find max and min values
+    for (i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+
+    // Display results
+    printf("Maximum value: %d\n", max);
+    printf("Minimum value: %d\n", min);
+
+    return 0;
+}
+
+----------------------------------------------------------------------------------------------------
+Example 12:
+c program to generate Pascal's Triangle
+
+Output:
+no of rows = 5
+           1
+	     1   1
+  	   1   2   1 
+	 1   3   3   1
+   1   4   6   4   1
+
+
+#include <stdio.h>
+
+int main() {
+    int rows, coef = 1, space, i, j;
+
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+
+    for (i = 0; i < rows; i++) {
+        // Print spaces for alignment
+        for (space = 1; space <= rows - i; space++) {
+            printf("  ");
+        }
+
+        // Print Pascal's Triangle values
+        for (j = 0; j <= i; j++) {
+            if (j == 0 || i == 0) {
+                coef = 1;
+            } else {
+                coef = coef * (i - j + 1) / j;
+            }
+            printf("%4d", coef);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+[2021ict113@fedora ~]$ touch pascal.c
+[2021ict113@fedora ~]$ vi pascal.c
+[2021ict113@fedora ~]$ gcc pascal.c -o pascal
+[2021ict113@fedora ~]$ ./pascal
+Enter the number of rows: 5
+             1
+           1   1
+         1   2   1
+       1   3   3   1
+     1   4   6   4   1
+
