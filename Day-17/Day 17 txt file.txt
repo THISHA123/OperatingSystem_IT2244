@@ -1,0 +1,146 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+// Function to calculate factorial
+int factorial(int n) {
+    int fact = 1;
+    for (int i = 1; i <= n; i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+// Function to check if a number is prime
+int is_prime(int num) {
+    if (num < 2) return 0;
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) return 0;
+    }
+    return 1;
+}
+
+// Function to print Fibonacci series up to n terms
+void fibonacci(int n) {
+    int a = 0, b = 1, next;
+    printf("Fibonacci Series up to %d terms: %d %d ", n, a, b);
+    for (int i = 2; i < n; i++) {
+        next = a + b;
+        printf("%d ", next);
+        a = b;
+        b = next;
+    }
+    printf("\n");
+}
+
+int main() {
+    int A, B, C;
+    printf("Enter three numbers (A, B, C): ");
+    scanf("%d %d %d", &A, &B, &C);
+
+    pid_t childQ, childA;
+
+    childQ = fork();
+    if (childQ == 0) { 
+        // Child process Q: Calculates factorial of A
+        printf("Factorial of %d is %d\n", A, factorial(A));
+        exit(0);
+    }
+
+    childA = fork();
+    if (childA == 0) { 
+        // Child process A: Calculates Fibonacci and checks prime
+        fibonacci(C);
+        printf("%d is %sprime\n", C, is_prime(C) ? "" : "not ");
+        exit(0);
+    }
+
+    // Parent waits for both child processes
+    wait(NULL);
+    wait(NULL);
+
+    return 0;
+}
+
+
+##########
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+// Function to calculate factorial
+long factorial(int num) {
+    long fact = 1;
+    for (int i = 1; i <= num; i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+// Function to print Fibonacci series up to num terms
+void fibonacci(int num) {
+    int a = 0, b = 1, next;
+    printf("Fibonacci series up to %d terms: ", num);
+    for (int i = 0; i < num; i++) {
+        printf("%d ", a);
+        next = a + b;
+        a = b;
+        b = next;
+    }
+    printf("\n");
+}
+
+// Function to check if a number is prime
+int is_prime(int num) {
+    if (num < 2) return 0;
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) return 0;
+    }
+    return 1;
+}
+
+int main() {
+    int A, B, C;
+    printf("Enter three numbers (A, B, C): ");
+    scanf("%d %d %d", &A, &B, &C);
+    
+    pid_t pid1, pid2;
+    
+    printf("I am parent P\n");
+    
+    // Create first child process for factorial
+    pid1 = fork();
+    if (pid1 == 0) { 
+        // Child Q process
+        printf("Child Q: Factorial of %d is %ld\n", A, factorial(A));
+        exit(0);
+    }
+    
+    // Create second child process for Fibonacci and prime check
+    pid2 = fork();
+    if (pid2 == 0) {
+        // Child A process
+        printf("Child A:\n");
+        fibonacci(C);
+        if (is_prime(C)) {
+            printf("%d is a prime number.\n", C);
+        } else {
+            printf("%d is not a prime number.\n", C);
+        }
+        exit(0);
+    }
+    
+    // Parent process waits for both children to finish
+    wait(NULL);
+    wait(NULL);
+    
+    return 0;
+}
+
+#################
