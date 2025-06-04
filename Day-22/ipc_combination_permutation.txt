@@ -1,0 +1,83 @@
+Build an IPC system where:
+
+The parent sends n and r to shared memory.
+
+The child calculates factorials of n, r, and n - r, and stores the results in shared memory.
+
+The parent then reads the results to compute nCr and nPr
+---------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+// Function to calculate factorial
+long factorial(int num) {
+    if (num == 0 || num == 1) return 1;
+    long fact = 1;
+    for (int i = 2; i <= num; i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+int main() {
+    key_t key = ftok("shmfile", 65);  // Generate unique key
+    int shmid = shmget(key, sizeof(long) * 3, IPC_CREAT | 0666); // Shared memory for 3 values
+    if (shmid == -1) {
+        perror("shmget failed");
+        exit(1);
+    }
+
+    long *shmaddr = (long *) shmat(shmid, NULL, 0); // Attach to shared memory
+    if (shmaddr == (long *) -1) {
+        perror("shmat failed");
+        exit(1);
+    }
+
+    int n, r;
+    printf("Enter values for n and r: ");
+    scanf("%d %d", &n, &r);
+    
+    shmaddr[0] = n; // Store n
+    shmaddr[1] = r; // Store r
+
+    pid_t pid = fork();
+
+    if (pid == 0) {  // Child process
+        shmaddr[2] = factorial(n);  // Compute factorial(n) and store
+        printf("Child: Factorial of %d is %ld\n", n, shmaddr[2]);
+        shmdt(shmaddr); // Detach shared memory
+        exit(0);
+    } else if (pid > 0) {  // Parent process
+        wait(NULL); // Wait for child to finish
+        long fact_n = shmaddr[2]; // Read factorial(n)
+        long fact_r = factorial(r);
+        long fact_nr = factorial(n - r);
+
+        long nCr = fact_n / (fact_nr * fact_r);
+        long nPr = fact_n / fact_nr;
+
+        printf("Parent: nCr = %ld, nPr = %ld\n", nCr, nPr);
+        
+        shmdt(shmaddr); // Detach shared memory
+        shmctl(shmid, IPC_RMID, NULL); // Remove shared memory
+    } else {
+        perror("Fork failed");
+        exit(1);
+    }
+
+    return 0;
+}
+
+
+[2021ict113@fedora ~]$ vi ipc_fact.c
+[2021ict113@fedora ~]$ gcc ipc_fact.c -o ipc_fact
+[2021ict113@fedora ~]$ ./ipc_fact
+Enter values for n and r: 5 2
+Child: Factorial of 5 is 120
+Parent: nCr = 10, nPr = 20
+

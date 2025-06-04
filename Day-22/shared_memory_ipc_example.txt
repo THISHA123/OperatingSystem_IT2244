@@ -1,0 +1,84 @@
+
+[2021ict113@fedora ~]$ vi writer.c
+
+//writer procees 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+
+#define SUM_SIZE 1024 
+
+int main() {
+    key_t key = ftok("shmfile", 30); // Generate unique key
+    int shmid = shmget(key, SUM_SIZE, IPC_CREAT | 0666); // Create shared memory
+    
+    if (shmid == -1) {
+        perror("shmget");
+        exit(1);
+    }
+
+    char *shmaddr = (char*) shmat(shmid, NULL, 0); // Attach to shared memory
+    if (shmaddr == (char*) -1) {
+        perror("shmat");
+        exit(1);
+    }
+
+    printf("Write Data: ");
+    fgets(shmaddr, SUM_SIZE, stdin); // Corrected argument
+
+    printf("Data written in memory: %s\n", shmaddr);
+
+    shmdt(shmaddr); // Detach shared memory
+
+    return 0;
+}
+
+[2021ict113@fedora ~]$ vi reader.c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+
+#define SUM_SIZE 1024 
+
+int main() {
+    key_t key = ftok("shmfile", 30); // Generate unique key
+    int shmid = shmget(key, SUM_SIZE, IPC_CREAT | 0666); // Create shared memory
+    
+    if (shmid == -1) {
+        perror("shmget");
+        exit(1);
+    }
+
+    char *shmaddr = (char*) shmat(shmid, NULL, 0); // Attach to shared memory
+    if (shmaddr == (char*) -1) {
+        perror("shmat");
+        exit(1);
+    }
+
+ 
+  
+    printf("Data read from memory: %s\n", shmaddr);
+
+    shmdt(shmaddr); // Detach shared memory
+	shmctl(shmid, IPC_RMID, NULL);
+
+    return 0;
+}
+
+[2021ict113@fedora ~]$ gcc writer.c -o writer
+[2021ict113@fedora ~]$ gcc reader.c -o reader
+[2021ict113@fedora ~]$ ./writer
+Write Data: Thishanthani
+Data written in memory: Thishanthani
+
+[2021ict30@fedora ~]$ ./reader
+Data read from memory: Thishanthani
+
+
+------------------------------------------------------------------------
+
