@@ -9,9 +9,7 @@
 |fibonacci|![7  fibonaaci](https://github.com/user-attachments/assets/138cec0c-92ef-4312-9e04-0befcfcb4672)|
 |factorial|![8  factorial](https://github.com/user-attachments/assets/f247373a-cfa9-4337-8e81-5dd9c7f3a840)|
 |concat words|![9  concat words](https://github.com/user-attachments/assets/ea217e45-6ffe-4fa2-ba85-badfb3f0223c)|
-|binary_decimal|![10  binary_decimal](https://github.com/user-attachments/assets/4eb7bd72-247f-4b9a-98ea-2d89cb5297e8)|
-|min_max|![11 min max array](https://github.com/user-attachments/assets/bc91c549-3b9b-443b-80a8-8ab4f9711796)|
-|pascal|![12 pascal](https://github.com/user-attachments/assets/3eb3a09c-1283-49bc-8d02-4fc3d9c18697)|
+
 
 
 
