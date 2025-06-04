@@ -1,0 +1,321 @@
+#include <stdio.h>
+
+int main() {
+  printf("Hello World!\n");
+  return 0;
+}
+
+
+#####variables
+
+int age; //store inteager value
+age=25;
+intt age=25;
+
+
+#include <stdio.h>
+
+int main() {
+  int age=25;
+  print(age);
+  //printf("%d",age);
+  return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+  int age=25;
+  print(age);
+  return 0;
+}
+cant mention directily then got error
+
+#########
+**C format specifiers**
+
+%d / %i → Integer (whole numbers)
+%f / %F → Floating-point numbers (decimal values)
+%lf → Double (higher precision floating-point)
+%e / %E → Scientific notation for floating-point numbers
+%c → Single character
+%s → String (sequence of characters)
+
+
+
+############
+
+#include <stdio.h>
+
+int main() {
+  int age=25;
+  printf("%d",age);
+  
+  printf("c programming");
+  
+  age=31;
+  printf("\nNew age:%d",age);
+  return 0;
+}
+
+[2021ict113@fedora ~]$ ./first2
+Age: 25
+c programming
+New age: 31
+
+#############################
+
+#include <stdio.h>
+
+int main() {
+  int firstNumber=25;
+  printf("first number:%d\n",firstNumber);
+  
+  int secondNumber=firstNumber;
+  printf("second Number:%d\n",secondNumber);
+  return 0;
+}
+
+[2021ict113@fedora ~]$ ./first3
+first number:25
+second Number:25
+
+
+#############################
+
+#include <stdio.h>
+
+int main() {
+  int firstNumber,secondNumber=25;
+  printf("first number:%d\n",firstNumber);
+  
+ 
+  printf("second Number:%d\n",secondNumber);
+  return 0;
+}
+
+[2021ict113@fedora ~]$ ./first5
+first number:1
+second Number:25
+
+it will take firstNumber as random number
+
+#variable naming conventions
+
+can't create variable name with space
+
+can't start variable name with numbers
+
+can't 
+
+
+###########################
+
+#include <stdio.h>
+
+int main() {
+    int age = 10;
+    printf("Age: %d\n", age);
+    
+    printf("Size of age: %zu bytes\n", sizeof(age));
+    
+    return 0;
+}
+
+[2021ict113@fedora ~]$ ./first4
+Age: 10
+Size of age: 4 bytes
+
+###########################
+
+#include <stdio.h>
+
+int main() {
+    double number=12.45;
+	printf("%lf",number);
+    
+    return 0;
+}
+
+
+[2021ict113@fedora ~]$ ./first6
+12.450000
+
+
+
+#########################
+#include <stdio.h>
+
+int main() {
+    double number=12.45;
+	printf("%lf",number);
+    printf("Size of number: %zu bytes\n", sizeof(number));
+    return 0;
+}
+
+
+[2021ict113@fedora ~]$ ./first7
+12.450000Size of number: 8 bytes
+
+
+###########################
+
+#include <stdio.h>
+
+int main() {
+    double number=12.45;
+	printf("%.2lf",number);
+    
+    return 0;
+}
+
+[2021ict113@fedora ~]$ ./first8
+12.45
+
+###########################
+
+#include <stdio.h>
+
+int main() {
+    float number = 10.9f;
+
+    printf("%f\n", number);  // Default float format
+    printf("%.1f\n", number);  // Print with 1 decimal place
+
+    return 0;
+}
+
+[2021ict113@fedora ~]$ ./first9
+10.900000
+10.9
+
+###########################
+
+#include <stdio.h>
+
+int main() {
+    char character = 'z';
+    
+    printf("Character: %c\n", character);
+    printf("ASCII Value: %d\n", character);
+    
+    return 0;
+}
+
+
+[2021ict113@fedora ~]$ ./first10
+Character: z
+ASCII Value: 122
+
+
+########################### take input from users
+
+#include <stdio.h>
+
+int main() {
+    int age;
+    
+    printf("Enter your age: ");
+    scanf("%d", &age);  // Take input first
+    
+    printf("Age = %d\n", age);  // Print after input
+
+    return 0;
+}
+
+[2021ict113@fedora ~]$ ./first11
+Enter your age: 23
+Age = 23
+
+
+########################### take input from users
+
+#include <stdio.h>
+
+int main() {
+    double number;
+    char alpha;
+    
+    printf("Enter double input: ");
+    scanf("%lf", &number);  // Correct format specifier for double
+    
+    printf("\nYour double input is: %.1f\n", number);  // Correct output format
+    
+    printf("Enter char input: ");
+    scanf(" %c", &alpha);  // Space before %c to ignore whitespace
+    
+    printf("Your char input is: %c\n", alpha);
+
+    return 0;
+}
+
+
+[2021ict113@fedora ~]$ ./first12
+Enter double input: 34.657
+
+Your double input is: 34.7
+Enter char input: a
+Your char input is: a
+
+
+#########################################
+
+#include <stdio.h>
+
+int main() {
+    double number;
+    char alpha;
+
+    printf("Enter double and char inputs: ");
+    scanf("%lf %c", &number, &alpha);  
+    
+    printf("\nYour double input is: %.2lf", number);
+    printf("\nYour char input is: %c\n", alpha);
+
+    return 0;
+}
+
+[2021ict113@fedora ~]$ ./first13
+Enter double and char inputs: 32.6 q
+
+Your double input is: 32.60
+Your char input is: q
+
+
+#########################################
+// - single live comments ctrl+/
+/* */ - mulktiple comments ctrl+shift+/
+
+
+
+
+###################### c perations
+arithmetic operations
++
+-
+*
+/
+%- reminder
+
+
+
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 3;
+
+    printf("Addition: %d\n", a + b);
+    printf("Subtraction: %d\n", a - b);
+    printf("Multiplication: %d\n", a * b);
+    printf("Division: %d\n", a / b);
+    printf("Modulus: %d\n", a % b);
+
+    return 0;
+}
+
+[2021ict113@fedora ~]$ ./first14
+Addition: 13
+Subtraction: 7
+Multiplication: 30
+Division: 3
+Modulus: 1
