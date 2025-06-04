@@ -1,4 +1,5 @@
 ✅ Summary of Each Method
+
 🔹 Method 1 – Two separate programs (send5.c & recieve5.c)
 Uses two separate processes.
 
@@ -12,12 +13,14 @@ recieve5.c: receives the message and deletes queue.
 
 Best for separate sender and receiver programs.
 
+
 🔹 Method 2 – Single program with send and receive (snd3.c)
 Sends and receives in same program.
 
 Uses ftok("snd3", 42) – file should exist.
 
 Good for learning/demo but not realistic in real IPC use (since both sending and receiving happen immediately one after the other).
+
 
 🔹 Method 3 – Simulating parent-child communication (sendrcv.c)
 Sends and receives student details (Name, RegNo, Age).
@@ -29,6 +32,7 @@ Uses a struct with multiple fields.
 Not actual parent-child process; just simulate sequentially.
 
 Good practice for structured message passing.
+
 
 🔹 Method 4 – Real parent-child using fork() (sendrcv9.c)
 Proper IPC with forked child process.
