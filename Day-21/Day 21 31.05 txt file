@@ -1,0 +1,336 @@
+method 1
+
+[2021ict30@fedora ~]$ touch progfile5
+[2021ict30@fedora ~]$ chmod 644 progfile5
+
+
+[2021ict30@fedora ~]$ vi send5.c
+
+
+//send
+#include<stdio.h>
+#include<sys/ipc.h> //for inter process communication
+#include<sys/msg.h> //for message passing
+#define MAX 10 //declaring maximum size
+
+//structure for message queue
+struct mesg_buffer{
+	long mesg_type;
+	char mesg_text[100];
+}message;
+
+int main()
+{
+	key_t key;
+	int msgid;
+	
+	//ftok to generate unique key
+	key = ftok("send5",65);
+	
+	//msgset creates a message queue
+	//and return identifier
+	msgid = msgget(key, 0666 | IPC_CREAT);
+	message.mesg_type=1;
+	printf("Write data : ");
+	fgets(message.mesg_text,MAX,stdin);
+	//msgsnd to send message
+	msgsnd(msgid,&message,sizeof(message.mesg_text),0);
+	//display the message
+	printf("Data send is : %s \n" , message.mesg_text);
+return 0;	
+}
+
+
+
+[2021ict30@fedora ~]$ vi recieve5.c
+
+
+//recieve 
+#include<stdio.h>
+#include<sys/ipc.h>
+#include<sys/msg.h>
+
+//structure for message queue
+struct mesg_buffer
+{
+	long mesg_type;
+	char mesg_text[100];
+}message;
+int main()
+{
+	key_t key;
+	int msgid;
+	
+	//ftok to generate unique key
+	key = ftok("2021ICT30",65);
+	
+	//msgset creates a message queue
+	//and return identifier
+	msgid = msgget(key, 0666 | IPC_CREAT);
+	//msgrcv to recieve message
+	msgrcv(msgid, &message, sizeof(message),1,0);
+	//display the message
+	printf("Data Recieved is : %s \n",message.mesg_text);
+
+    //to destroy thye message queue	
+	msgctl(msgid, IPC_RMID,NULL);
+	return 0;
+	
+}
+
+
+[2021ict30@fedora ~]$ gcc send5.c -o send5
+[2021ict30@fedora ~]$ gcc recieve5.c -o recieve5
+
+[2021ict30@fedora ~]$ ./send5
+Write data : hi izla
+Data send is : hi izla
+
+[2021ict30@fedora ~]$ ./recieve5
+Data Recieved is : hi izla
+
+
+--------------------------------------------------------------------------------------------------------
+method 2
+
+//path name as a file name 
+
+[2021ict30@fedora ~]$ vi snd3.c
+
+//send
+
+#include <stdio.h>
+#include <sys/ipc.h> //for inter process communication
+#include <sys/msg.h> //for message passing
+#define MAX 100    //declarinmg maximum size
+
+//structure for message queue
+struct mesg_buffer {
+	long mesg_type;
+	char mesg_text[100];
+}
+message;
+
+int main(){
+	key_t key;
+	int msgid;
+ 
+//ftok to generate unique key
+key = ftok("snd3",42);
+
+//msgget creates a message queue
+// and returns identifier
+msgid = msgget(key, 0666 | IPC_CREAT);
+message.mesg_type = 1;
+printf("Write Data : ");
+fgets(message.mesg_text,MAX,stdin);
+
+//msgsnd to send message
+msgsnd(msgid,&message,sizeof(message),0);
+
+//display the message
+printf("Data send is : %s \n",message.mesg_text);
+ 	
+
+//receive
+
+
+//msgrcv to receive message
+msgrcv(msgid,&message,sizeof(message),1,0);
+//display the message
+printf("Data received is : %s \n",message.mesg_text);
+//to destroy the message queue
+msgctl(msgid , IPC_RMID,NULL);
+return 0;	
+}
+
+
+[2021ict30@fedora ~]$ gcc snd3.c -o snd3
+[2021ict30@fedora ~]$ ./snd3
+Write Data : hi Izla
+Data send is : hi Izla
+
+Data received is : hi Izla
+
+--------------------------------------------------------------------------------------------------------
+
+Parent should read name, registration_Number, age and
+send it the child. child after recieving details 
+it should print as "Recieved" and print the Name, 
+registration Number, age
+
+
+[2021ict30@fedora ~]$ touch progfile7
+[2021ict30@fedora ~]$ chmod 644 progfile7
+
+[2021ict30@fedora ~]$ vi sendrcv.c
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+#define MAX_SIZE 100
+
+// Structure for message queue
+struct message {
+    long msg_type;
+   char name[MAX_SIZE];
+    char regNo[MAX_SIZE];
+    int age;
+};
+
+int main() {
+    key_t key;
+    int msgid;
+
+    // Generate unique key
+    key = ftok("progfile5", 43);
+
+    // Create message queue
+    msgid = msgget(key, 0666 | IPC_CREAT);
+
+    if (msgid == -1) {
+        perror("msgget failed");
+        exit(1);
+    }
+
+    struct message msg;
+    msg.msg_type = 1;
+
+    // Parent process: Send data
+    printf("Enter Name: ");
+    scanf("%s", msg.name);
+    printf("Enter RegNo: ");
+    scanf("%s", msg.regNo);
+    printf("Enter Age: ");
+    scanf("%d", &msg.age);
+
+    msgsnd(msgid, &msg, sizeof(msg) - sizeof(long), 0);
+    printf("Message sent successfully.\n");
+
+    // Child process: Receive data
+    msgrcv(msgid, &msg, sizeof(msg) - sizeof(long), 1, 0);
+    printf("Received Name: %s\n", msg.name);
+    printf("Received RegNo: %s\n", msg.regNo);
+    printf("Received Age: %d\n", msg.age);
+
+    // Destroy the message queue
+    msgctl(msgid, IPC_RMID, NULL);
+
+    return 0;
+}
+
+[2021ict30@fedora ~]$ gcc sendrcv.c -o sendrcv
+
+[2021ict30@fedora ~]$ ./sendrcv
+Enter Name: izla
+Enter RegNo: 2021ict30
+Enter Age: 23
+Message sent successfully.
+Received Name: izla
+Received RegNo: 2021ict30
+Received Age: 23
+
+--------------------------------------------------------------------------------------------------------
+
+[2021ict30@fedora ~]$ touch progfile9
+[2021ict30@fedora ~]$ chmod 644 progfile9
+
+[2021ict30@fedora ~]$ vi sendrcv9.c
+
+//shared code
+
+#include <sys/msg.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#define MSGKEY 1111
+#define MAX_NAME_LEN 100
+#define MAX_REGNO_LEN 100
+
+struct person {
+    long mtype; // Message type
+    int age;
+    char name[MAX_NAME_LEN];
+    char regno[MAX_REGNO_LEN];
+};
+
+int main() {
+    int msqid;
+    struct person p1, p2;
+    int f = fork();
+
+    if (f == 0) {
+        // Child process: Receiver
+        msqid = msgget(MSGKEY, IPC_CREAT | 0666); 
+        if (msqid == -1) {
+            perror("msgget failed");
+            exit(EXIT_FAILURE);
+        }
+
+        int msg_size = sizeof(struct person) - sizeof(long);
+
+        if (msgrcv(msqid, &p2, msg_size, 0, 0) == -1) {
+            perror("msgrcv failed");
+            exit(EXIT_FAILURE);
+        } else {
+            printf("Received Name: %s\n", p2.name);
+            printf("Received RegNo: %s\n", p2.regno);
+            printf("Received Age: %d\n", p2.age);
+        }
+
+        if (msgctl(msqid, IPC_RMID, NULL) == -1) {
+            perror("msgctl failed");
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        // Parent process: Sender
+        msqid = msgget(MSGKEY, IPC_CREAT | 0666);
+        if (msqid == -1) {
+            perror("msgget failed");
+            exit(EXIT_FAILURE);
+        }
+
+        p1.mtype = 1;
+
+        printf("Enter Name: ");
+        scanf("%s", p1.name);
+
+        printf("Enter RegNo: ");
+        scanf("%s", p1.regno);
+
+        printf("Enter Age: ");
+        scanf("%d", &p1.age);
+
+        int msg_size = sizeof(struct person) - sizeof(long);
+
+        if (msgsnd(msqid, &p1, msg_size, IPC_NOWAIT) == -1) {
+            perror("msgsnd failed");
+        } else {
+            printf("Message sent successfully.\n");
+        }
+
+        exit(0);
+    }
+
+    return 0;
+}
+
+[2021ict30@fedora ~]$ gcc sendrcv9.c -o sendrcv9
+
+[2021ict30@fedora ~]$ ./sendrcv9
+Enter Name: izla
+Enter RegNo: 2021ict30
+Enter Age: 23
+Message sent successfully.
+Received Name: izla
+Received RegNo: 2021ict30
+Received Age: 23
+
+
+
+
