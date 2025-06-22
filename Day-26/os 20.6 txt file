@@ -1,0 +1,141 @@
+20.06.2025 Practical
+
+Q1.Write a C program that creates two threads.Each thread should print a message indicating it is running.
+The main thread should wait for both threads to finish before exiting.
+#include <pthread.h>
+#include <stdio.h>
+
+void* threadFunc(void* arg) {
+    printf("Thread %s is running.\n", (char*)arg);
+    return NULL;
+}
+
+int main() {
+    pthread_t t1, t2;
+    pthread_create(&t1, NULL, threadFunc, "1");
+    pthread_create(&t2, NULL, threadFunc, "2");
+
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+
+    printf("Main thread: Both threads finished.\n");
+    return 0;
+}
+
+
+Q2.Write a program to create 5 threads.Each hread should print its thread ID and then exit.
+The main thread should join all threads and print a completion message.
+#include <pthread.h>
+#include <stdio.h>
+
+void* threadFunc(void* arg) {
+    long id = (long)arg;
+    printf("Thread ID: %ld\n", id);
+    return NULL;
+}
+
+int main() {
+    pthread_t threads[5];
+    for (long i = 0; i < 5; ++i) {
+        pthread_create(&threads[i], NULL, threadFunc, (void*)i);
+    }
+
+    for (int i = 0; i < 5; ++i) {
+        pthread_join(threads[i], NULL);
+    }
+
+    printf("Main thread: All threads completed.\n");
+    return 0;
+}
+
+Q3.Write a program that creates a thread which prints numbers from 1 to 10 with a 1-second delay
+between each number.The main thread should wait for this thread to finish.
+#include <pthread.h>
+#include <stdio.h>
+#include <unistd.h>
+
+void* countFunc(void* arg) {
+    for (int i = 1; i <= 10; ++i) {
+        printf("%d\n", i);
+        sleep(1);  // 1 second delay
+    }
+    return NULL;
+}
+
+int main() {
+    pthread_t counterThread;
+    pthread_create(&counterThread, NULL, countFunc, NULL);
+    pthread_join(counterThread, NULL);
+    printf("Main thread: Counting finished.\n");
+    return 0;
+}
+
+
+Q4.Create two threads where one thread increments a global counter 100 times and the other 
+thread decrements the same counter 100 times.
+print the final value of the counter after both threads finish.
+#include <pthread.h>
+#include <stdio.h>
+
+int counter = 0;
+pthread_mutex_t lock;
+
+void* increment(void* arg) {
+    for (int i = 0; i < 100; ++i) {
+        pthread_mutex_lock(&lock);
+        counter++;
+        pthread_mutex_unlock(&lock);
+    }
+    return NULL;
+}
+
+void* decrement(void* arg) {
+    for (int i = 0; i < 100; ++i) {
+        pthread_mutex_lock(&lock);
+        counter--;
+        pthread_mutex_unlock(&lock);
+    }
+    return NULL;
+}
+
+int main() {
+    pthread_t t1, t2;
+    pthread_mutex_init(&lock, NULL);
+
+    pthread_create(&t1, NULL, increment, NULL);
+    pthread_create(&t2, NULL, decrement, NULL);
+
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+
+    printf("Final counter value: %d\n", counter);
+    pthread_mutex_destroy(&lock);
+    return 0;
+}
+
+
+Q5.Implement a thread function that takes an integer argument,squares it,and returns the result 
+to the main thread using pthread_exit and pthread_join.
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+void* squareFunc(void* arg) {
+    int num = *(int*)arg;
+    int* result = malloc(sizeof(int));
+    *result = num * num;
+    pthread_exit(result);
+}
+
+int main() {
+    pthread_t thread;
+    int value = 6;
+    int* result;
+
+    pthread_create(&thread, NULL, squareFunc, &value);
+    pthread_join(thread, (void**)&result);
+
+    printf("Square of %d is %d\n", value, *result);
+    free(result);
+    return 0;
+}
